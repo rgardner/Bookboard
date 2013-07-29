@@ -4,10 +4,10 @@ class UsersController < ApplicationController
   end
 
   def create
-    # redirect_to root_path if signed_in?
+    redirect_to root_path if signed_in?
     @user = User.new(user_params)
     if @user.save
-      # sign_in @user
+      sign_in @user
       flash[:success] = "Welcome to Bookboard!"
       redirect_to @user
     else
