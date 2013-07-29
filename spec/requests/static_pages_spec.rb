@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "Static pages" do
 
-  subject  { page }
+  subject { page }
 
   shared_examples_for "all static pages" do
     it { should have_content(heading) }
@@ -30,5 +30,7 @@ describe "Static pages" do
     before { visit about_path }
     let(:heading)    { 'About Us' }
     let(:page_title) { 'About Us'}
+
+    it_should_behave_like "all static pages"
   end
 end
