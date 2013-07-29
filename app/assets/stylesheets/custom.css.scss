@@ -1,6 +1,20 @@
 @import "bootstrap";
 
+/* mixins, variables, etc. */
+
+$grayMediumLight: #eaeaea;
+
+@mixin box_sizing {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
 /* universal */
+
+body {
+    padding-top: 20px;
+}
 
 .center {
     text-align: center;
@@ -36,3 +50,54 @@ p {
 }
 
 /* header */
+
+#logo {
+    float: left;
+    margin-right: 10px;
+    font-size: 1.7em;
+    color: scale-color($blue, $lightness: -20%);
+    text-transform: lowercase;
+    letter-spacing: -1px;
+    padding-top: 9px;
+    line-height: 1;
+    &:hover {
+        color: white;
+        text-decoration: none;
+    }
+}
+
+/* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid $grayMediumLight;
+  color: $grayLight;
+  a {
+    color: $gray;
+    &:hover {
+      color: $grayDarker;
+    }
+  }
+  small {
+    float: left;
+  }
+  ul {
+    float: right;
+    list-style: none;
+    li {
+      float: left;
+      margin-left: 10px;
+    }
+  }
+}
+
+/* miscellaneous */
+
+.debug_dump {
+    clear: both;
+    float: left;
+    width: 50%;
+    margin-top: 45px;
+    @include box_sizing;
+}
