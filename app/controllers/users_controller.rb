@@ -1,13 +1,14 @@
 class UsersController < ApplicationController
   before_action :signed_in_user, only: [:edit, :update, :destroy]
-  before_action :correct_user,   only: [:edit, :update, :destroy]
+  before_action :existing_user, only: [:new, :create]
+  before_action :correct_user,   only: [:edit, :update]
+  before_action :manage_user,    only: :destroy
+  
   def new
-    redirect_to root_path if signed_in?
     @user = User.new
   end
 
   def create
-    redirect_to root_path if signed_in?
     @user = User.new(user_params)
     if @user.save
       sign_in @user
@@ -35,6 +36,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    if current_user?(@user)
+      @user.destroy
+      flash[:success] = "Account deleted, thanks for trying Bookboard!"
+    else # User is an admin
+      User.find(params[:id]).destroy
+      flash[:success] = "User destroyed."
+    end
+    redirect_to(root_url)
+  end
+
   private
 
     def user_params
@@ -43,9 +55,22 @@ class UsersController < ApplicationController
     end
 
     # Before filters
-  
+
+    def existing_user
+      redirect_to current_user if signed_in?
+    end
+
     def correct_user
       @user = User.find(params[:id])
-      redirect_to(root_path) unless current_user?(@user)
+      redirect_to(root_url) unless current_user?(@user)
+    end
+
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
+    end
+
+    def manage_user
+      @user = User.find(params[:id])
+      redirect_to(root_url) unless current_user?(@user) || current_user.admin?
     end
 end
