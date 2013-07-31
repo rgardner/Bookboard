@@ -27,3 +27,8 @@ Bookboard::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 end
+
+silence_warnings do
+  require 'pry'
+  IRB = Pry
+end

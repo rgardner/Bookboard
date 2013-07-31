@@ -14,6 +14,8 @@ group :development, :test do
   gem 'guard-rspec', '2.5.0'
   gem 'childprocess', '0.3.6'
   gem 'terminal-notifier-guard', '1.5.3'
+  gem 'pry', '0.9.12.2'
+  gem 'debugger', '1.6.1'
 end
 
 group :test do
