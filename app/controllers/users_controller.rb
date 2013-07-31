@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
-  before_action :signed_in_user, only: [:edit, :update, :destroy]
+  before_action :signed_in_user, only: [:edit, :update, :destroy, :index]
   before_action :existing_user,  only: [:new, :create]
   before_action :correct_user,   only: [:edit, :update]
   before_action :manage_user,    only: :destroy
+  before_action :admin_user,     only: :index
   
   def new
     @user = User.new
@@ -45,6 +46,10 @@ class UsersController < ApplicationController
       flash[:success] = "User destroyed."
     end
     redirect_to(root_url)
+  end
+
+  def index
+    @users = User.paginate(page: params[:page])
   end
 
   private

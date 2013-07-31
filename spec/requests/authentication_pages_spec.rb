@@ -122,6 +122,11 @@ describe "Authentication" do
           specify { expect(response).to redirect_to(root_url) }
         end
       end
+
+      describe "visiting Users#index page" do
+        before { visit users_path }
+        it { should_not have_title('All users') }
+      end
     end
   end
 end

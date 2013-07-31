@@ -134,4 +134,46 @@ describe "User Pages" do
       specify { expect(user.reload).not_to be_admin }
     end
   end
+
+  describe "Index page" do
+    let(:page_title) { 'All users' }
+    let(:heading)    { 'All users' }
+    let(:user)       { FactoryGirl.create(:user) }
+    let(:admin)      { FactoryGirl.create(:admin) }
+    
+    before(:each) do
+      sign_in admin
+      visit users_path
+    end
+
+    it_should_behave_like "all user pages"
+
+    describe "pagination" do
+      before(:all) { 30.times { FactoryGirl.create(:user) } }
+      after(:all)  { User.delete_all }
+
+      it { should have_selector('div.pagination') }
+
+      it "should list each user" do
+        User.paginate(page: 1).each do |user|
+          expect(page).to have_selector('li', text: user.name)
+        end
+      end
+    end
+
+    describe "delete links" do
+      before(:all) { FactoryGirl.create(:user) }
+      after(:all)  { User.delete_all}
+
+      it { should have_link('delete') }
+      
+      it "should be able to delete another user" do
+        expect do
+          click_link('delete', match: :first)
+        end.to change(User, :count).by(-1)
+      end
+
+      it { should_not have_link('delete', href: user_path(admin)) }
+    end
+  end
 end
