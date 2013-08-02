@@ -9,4 +9,14 @@ FactoryGirl.define do
       admin true
     end
   end
+
+  factory :booklist do
+    sequence(:title) { |n| "Booklist #{n}" }
+    user
+  end
+
+  factory :book do
+    sequence(:title) { |n| "Title #{n}" }
+    booklist
+  end
 end
