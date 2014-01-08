@@ -1,0 +1,26 @@
+<% provide(:title, 'Edit user') %>
+<h1>Update your profile</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@user) do |f| %>
+      <%= render 'fields', f: f %>
+      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+    <% end %>
+    <section>
+      <%= gravatar_for @user %>
+      <%= link_to "change profile picture", "http://gravatar.com/emails",
+                                         target: "_blank" %>
+    </section>
+    <h3>Privacy</h3>
+    <h3>Download your data</h3>
+    <h3>Delete Account</h3>
+    <p>
+      Deleting your account removes all of your bookboards. The urls to them
+       will immediately be invalid and will redirect to the home page.
+    </p>
+    <%= link_to "Delete Account", @user, method: :delete,
+                                         data: { confirm: "You sure?" },
+                                          class: "btn btn-danger" %>
+  </div>
+</div>
