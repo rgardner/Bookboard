@@ -1,0 +1,7 @@
+<%= form_for(@booklist) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="field">
+    <%= f.text_field :title, placeholder: "Enter a name for your list" %>
+  </div>
+  <%= f.submit "Add List", class: "btn btn-med btn-primary" %>
+<% end %>
