@@ -5,7 +5,7 @@ class BooklistsController < ApplicationController
     @booklist = current_user.booklists.build(booklist_params)
     if @booklist.save
       flash[:success] = "Booklist created!"
-      redirect_to @booklist
+      redirect_to current_user
     end
   end
 
@@ -15,12 +15,17 @@ class BooklistsController < ApplicationController
 
   def destroy
     @booklist.destroy
-    redirect_to @current_user
+    redirect_to current_user
   end
 
   private
 
     def booklist_params
       params.require(:booklist).permit(:title)
+    end
+
+    def correct_user
+      @booklist = current_user.booklists.find_by(id: params[:id])
+      redirect_to(root_url) if @booklist.nil?
     end
 end

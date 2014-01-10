@@ -1,0 +1,8 @@
+<li>
+  <span><%= "#{booklist.title} (#{booklist.books.count})" %></span>
+  <% if current_user?(booklist.user) %>
+    <%= link_to "delete", booklist, method: :delete,
+                                    data: { confirm: "You sure?" },
+                                    title: booklist.title %>
+  <% end %>
+</li>
