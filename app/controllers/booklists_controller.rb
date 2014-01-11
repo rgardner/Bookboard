@@ -6,6 +6,10 @@ class BooklistsController < ApplicationController
     if @booklist.save
       flash[:success] = "Booklist created!"
       redirect_to current_user
+    else
+      @user = current_user.reload
+      @booklists = @user.booklists
+      render "users/show"
     end
   end
 
