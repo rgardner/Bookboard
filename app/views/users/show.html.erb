@@ -9,18 +9,7 @@
         </section>
         <section>
           <h3>Booklists</h3>
-          <% if @user.booklists.any? %>
-            <ul class="booklists">
-              <%= render @booklists %>
-            </ul>
-          <% else %>
-            <p>Nothing to see here...</p>
-          <% end %>
+          <p>Nothing to see here yet...</p>
         </section>
-        <% if current_user?(@user) %>
-          <section>
-            <%= render 'shared/booklist_form' %>
-          </section>
-        <% end %>
     </aside>
 </div>
