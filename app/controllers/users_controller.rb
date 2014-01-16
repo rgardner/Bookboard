@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    if current_user?(@user)
+    if signed_in?
       @book = current_user.books.build
     end
   end
