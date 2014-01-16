@@ -41,4 +41,16 @@ describe "Book Pages" do
       end
     end
   end
+
+  describe "book destruction" do
+    before { FactoryGirl.create(:book, user: user) }
+
+    describe "as correct user" do
+      before { visit user_path(user) }
+
+      it "should delete a book" do
+        expect { click_link "delete" }.to change(Book, :count).by(-1)
+      end
+    end
+  end
 end

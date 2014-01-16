@@ -1,6 +1,6 @@
 Bookboard::Application.routes.draw do
 
-  resources :books,    only: [:create]
+  resources :books,    only: [:create, :destroy]
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   
