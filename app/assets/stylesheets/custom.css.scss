@@ -149,6 +149,16 @@ input {
   height: auto !important;
 }
 
+#book_form {
+    display: inline;
+    :not(.btn) {
+        width: 200px;
+    }
+    .btn {
+        margin-bottom: 10px;
+    }
+}
+
 #error_explanation {
     color: #f00;
     ul {
