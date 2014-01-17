@@ -1,6 +1,6 @@
 class Book < ActiveRecord::Base
-  belongs_to :booklist
-  validates :author,       presence: true
-  validates :title,        presence: true
-  validates :booklist_id,  presence: true
+  belongs_to :user
+  validates :author,  presence: true
+  validates :title,   presence: true
+  validates :user_id, presence: true
 end

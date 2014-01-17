@@ -22,6 +22,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    if current_user?(@user)
+      @book = current_user.books.build
+    end
   end
 
   def edit

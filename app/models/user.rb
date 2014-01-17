@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :booklists, dependent: :destroy
+  has_many :books, dependent: :destroy
   before_save { email.downcase! }
   before_create :create_remember_token
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
