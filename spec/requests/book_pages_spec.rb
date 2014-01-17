@@ -11,6 +11,13 @@ describe "Book Pages" do
     before { visit user_path(user) }
     let(:submit) { "Add book" }
 
+    describe "as wrong user" do
+      let(:wrong_user) { FactoryGirl.create(:user) }
+      before { visit user_path(wrong_user) }
+
+      it { should_not have_selector('input', text: 'Add book')}
+    end
+
     describe "with invalid information" do
 
       it "should not create a book" do

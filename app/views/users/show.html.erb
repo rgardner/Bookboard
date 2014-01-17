@@ -14,7 +14,7 @@
     </aside>
     <div class="span9">
       <h3>Books (<%= @user.books.count %>)</h3>
-      <%= render 'shared/book_form' if signed_in? %>
+      <%= render 'shared/book_form' if current_user?(@user) %>
       <% if @user.books.any? %>
         <ol class="books">
           <%= render @user.books %>
