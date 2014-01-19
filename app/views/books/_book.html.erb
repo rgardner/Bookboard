@@ -1,5 +1,6 @@
 <li>
-  <%= book.title %> by <%= book.author %>
+  <span class="title"><%= book.title %></span>
+  by <span class="author"><%= book.author %></span>
   <% if current_user?(book.user) %>
     <%= link_to "delete", book, method: :delete,
                                 data: { confirm: "You sure?" },
