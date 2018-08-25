@@ -1,9 +1,10 @@
 <li>
-  <span class="title"><%= book.title %></span>
+  <span class="title"><%= book.title %></span><br>
   by <span class="author"><%= book.author %></span>
   <% if current_user?(book.user) %>
     <%= link_to "delete", book, method: :delete,
                                 data: { confirm: "You sure?" },
                                 title: book.title %>
   <% end %>
+  <p><%= raw book.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></p>
 </li>
